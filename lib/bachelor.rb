@@ -36,7 +36,7 @@ def count_contestants_by_hometown(data, hometown)
         if value == hometown
           hometown_array << participant_hash["hometown"]
         end
-      end   
+      end
     end
   end
   hometown_array.length
@@ -58,7 +58,7 @@ def get_occupation(data, hometown)
 end
 
 # return average age when passed season
-# use inject? 
+# use inject?
 # average age should be an integer
 def get_average_age_for_season(data, season)
   age_array =[]
