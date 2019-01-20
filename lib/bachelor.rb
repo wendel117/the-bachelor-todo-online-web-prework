@@ -1,3 +1,4 @@
+
 def get_first_name_of_season_winner(data, season)
   winner = ""
   data[season].each do |participant_hash| # participant hash is an array
@@ -10,62 +11,30 @@ def get_first_name_of_season_winner(data, season)
   winner
 end
 
-# What is the name of the woman whose occupation is cruise ship singer?
+
 def get_contestant_name(data, occupation)
-  participant = ""
-  data.each do |season,participants_data|
-    participants_data.each do |participant_hash|
-      participant_hash.each do |key, value|
-        if value == occupation
-          participant = participant_hash["name"]
-        end
-      end
-    end
-  end
-  participant
+  # code here
+  contestants = data.collect{|season_key, season| season}.flatten
+  contestants.find{|contestant| contestant["occupation"] == occupation}["name"]
 end
 
-# return number of contestants hailing from a specific hometown
 def count_contestants_by_hometown(data, hometown)
-  # return number of contestants given town
-  # push into array. array.length
-  hometown_array = []
-  data.each do |season, participants_data|
-    participants_data.collect do |participant_hash|
-      participant_hash.each do |key, value|
-        if value == hometown
-          hometown_array << participant_hash["hometown"]
-        end
-      end
-    end
-  end
-  hometown_array.length
+  # code here
+  contestants = data.collect{|season_key, season| season}.flatten
+  contestants.count{|contestant| contestant["hometown"] == hometown}
 end
 
-# return occupation by hometown
 def get_occupation(data, hometown)
-  participant = ""
-  data.each do |season,participants_data|
-    participants_data.each do |participant_hash|
-      participant_hash.each do |key, value|
-        if value == hometown
-          participant = participant_hash["occupation"]
-        end
-      end
-    end
-  end
-  participant
+  # code here
+  contestants = data.collect{|season_key, season| season}.flatten
+  contestants.find{|contestant| contestant["hometown"] == hometown}["occupation"]
 end
 
-# return average age when passed season
-# use inject?
-# average age should be an integer
 def get_average_age_for_season(data, season)
-  age_array =[]
-  data[season].each do |participant_hash| # participant hash is an array
-    age_array << participant_hash["age"].to_i
-  end
-  # age_array.inject { |sum, i| avg = ((sum + i) / data[season].size)  }
-  (age_array.reduce(:+).to_f / data[season].size).round
-  # the error was literally a rounding error
+  # code here
+  contestants = data[season]
+  ages = contestants.collect {|contestant|  contestant["age"].to_i}
+  average_age = ages.inject(0.0){|sum, age| sum + age} / ages.size
+  decimal_part = average_age - average_age.floor
+  decimal_part > 0.5 ? average_age.ceil : average_age.floor
 end
