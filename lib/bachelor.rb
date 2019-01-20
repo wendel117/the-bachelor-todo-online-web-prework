@@ -13,7 +13,7 @@ end
 def get_occupation(data, hometown)
   # code here
   contestants = data.collect{|season_key, season| season}.flatten
-  contestants.find{|contestant| contestant["hometown"] == hometown}["occupation"] 
+  contestants.find{|contestant| contestant["hometown"] == hometown}["occupation"]
 end
 
 def get_average_age_for_season(data, season)
