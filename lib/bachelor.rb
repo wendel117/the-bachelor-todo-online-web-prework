@@ -1,3 +1,17 @@
+
+def get_first_name_of_season_winner(data, season)
+  winner = ""
+  data[season].each do |participant_hash| # participant hash is an array
+    participant_hash.select do |key, value|
+      if value == "Winner"
+        winner = participant_hash["name"].split(" ").first
+      end
+    end
+  end
+  winner
+end
+
+
 def get_contestant_name(data, occupation)
   # code here
   contestants = data.collect{|season_key, season| season}.flatten
